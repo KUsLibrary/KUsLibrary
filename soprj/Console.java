@@ -1,4 +1,4 @@
-package soprj;
+package tmp;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
@@ -18,7 +18,7 @@ public class Console {
 		af = new AdminFunction(admin);
 		//uf = new UserFunction(); uf = new UserFunction(user);
 		userInfo = new LinkedList<>();
-		readUserFile("src/UserFile.txt");
+		readUserFile("./UserFile.txt");
 	}
 	
 	/*
@@ -107,7 +107,7 @@ public class Console {
 		}
 		if(input.equals("1")) {
 			
-			//������ �н����� �Է¹ް� Ʋ���� ����ó�� ������ �����ڱ�� run
+			//관리자 패스워드 입력받고 틀리면 예외처리 맞으면 관리자기능 run
 			af.run();
 		}
 		else if(input.equals("2")) {
@@ -126,14 +126,14 @@ public class Console {
 					break;
 				}
 			}
-			//����� ���̵�, ��й�ȣ �Է¹ް� Ʋ���� ����ó�� ������ ������� run
+			//사용자 아이디, 비밀번호 입력받고 틀리면 예외처리 맞으면 유저기능 run
 			
 			
-			//uf.run(); //������� run�� ���̵� ��й�ȣ �м��ؼ� admin.uList���� �˸��� �ν��Ͻ� �����ͼ� �־������ User�ν��Ͻ�
+			//uf.run(); //유저기능 run에 아이디 비밀번호 분석해서 admin.uList에서 알맞은 인스턴스 가져와서 넣어줘야함 User인스턴스
 			
 		}
 		else {
-			//�ڷΰ���
+			//뒤로가기
 		}
 	}
 	
@@ -157,7 +157,7 @@ public class Console {
 		return null;
 	}
 	
-	public void signUp() { //ȸ������ ����ó�� �ʿ���
+	public void signUp() {
 		boolean goMain = false;
 		String name, id, pw, number;
 		System.out.println("====== 회원 가입 ======");

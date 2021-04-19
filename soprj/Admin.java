@@ -16,6 +16,20 @@ public class Admin {
 		uList.add(user);
 		System.out.println("리스트에 추가완료: " + uList.get(uList.size() - 1).getName()); //리스트에 잘 추가됐는지 확인용
 	}
+	
+	public void setUser(User user) {
+		int index = 0;
+		for (User tempUser : uList) {
+			if (tempUser.getID().equals(user.getID())) {
+				uList.set(index, user);		
+				// 위와 같이 user 갱신했을 때, 정상적으로 동작하는지 점검 필요.
+				// 만약 정상적으로 동작하지 않는다면 get 함수 사용해야 할 것 같음
+				break;
+			}
+			index++;
+		}
+	}
+	
 	public void addBook(Book book) { //도서 등록시 도서 추가
 		bList.add(book);
 	}

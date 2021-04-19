@@ -16,7 +16,7 @@ public class Console {
 		scanner = new Scanner(System.in);
 		af = new AdminFunction(admin);
 		uf = new UserFunction();
-		readUserFile("./UserFile");
+		readUserFile("src/UserFile.txt");
 	}
 	
 	/*
@@ -120,7 +120,7 @@ public class Console {
 					break;
 				}
 				else {
-					uf.run(helloUser);  // 해당 유저의 실행 창 수행
+					admin.setUser(uf.run(helloUser));  // 해당 유저의 실행 창 수행
 					break;
 				}
 			}

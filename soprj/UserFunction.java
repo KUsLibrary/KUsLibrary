@@ -1,11 +1,20 @@
-package soprj;
+package tmp;
+
 
 public class UserFunction {
-	public UserFunction(User user) {
+	
+	
+	public UserFunction() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public void run() {
+		
 		
 	}
+	
+	
+	public User run(User user) {
+		return user;
+	}
+	
+	
+	
 }

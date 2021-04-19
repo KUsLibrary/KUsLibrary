@@ -19,14 +19,16 @@ public class Admin {
 	public void addBook(Book book) { //도서 등록시 도서 추가
 		bList.add(book);
 	}
-	public void removeUser() { //회원 삭제
-		
+	public void removeUser(int num) { //회원 삭제
+		uList.remove(num);
 	}
-	public void removeBook() { //도서 삭제
-		
+	public void removeBook(int num) { //도서 삭제
+		bList.remove(num);
 	}
-	public ArrayList<User> getUserList() {
+	public ArrayList<User> getUserList() { //userList접근용
 		return uList;
 	}
-	
+	public ArrayList<Book> getBookList() { //bookList접근용
+		return bList;
+	}
 }

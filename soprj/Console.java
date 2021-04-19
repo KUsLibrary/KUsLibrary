@@ -10,15 +10,13 @@ public class Console {
 	private String input;
 	private AdminFunction af;
 	private UserFunction uf;
-	private LinkedList<User> userInfo;
 	
 	Console() {
 		admin = new Admin();
 		scanner = new Scanner(System.in);
 		af = new AdminFunction(admin);
-		//uf = new UserFunction(); uf = new UserFunction(user);
-		userInfo = new LinkedList<>();
-		readUserFile("./UserFile.txt");
+		uf = new UserFunction();
+		readUserFile("./UserFile");
 	}
 	
 	/*
@@ -55,14 +53,14 @@ public class Console {
 					String tempID = fileScan.nextLine();
 					String tempPW = fileScan.nextLine();
 					String tempNum = fileScan.nextLine();
-					userInfo.add(new User(tempName, tempID, tempPW, tempNum));		// LinkedList에 사용자 정보 한명씩 추가
+					admin.getUserList().add(new User(tempName, tempID, tempPW, tempNum));		// LinkedList에 사용자 정보 한명씩 추가
 					if (fileScan.nextLine().equals("_BOOK_")) {
 						int count = 0;
 						while(fileScan.hasNextLine()) {
 							int bookCount = Integer.parseInt(fileScan.nextLine());
 							String[] bookTemp = fileScan.nextLine().split(" ");
 							if (bookTemp.length >= 2)
-								userInfo.get(userInfo.size() - 1).addBook(bookTemp[0], bookTemp[1]);	// 사용자가 대출 중인 책 번호와 대출일 넘기기
+								admin.getUserList().get(admin.getUserList().size() - 1).addBook(bookTemp[0], bookTemp[1]);	// 사용자가 대출 중인 책 번호와 대출일 넘기기
 							count++;
 							if (count == bookCount) break;
 						}
@@ -122,7 +120,7 @@ public class Console {
 					break;
 				}
 				else {
-					uf = new UserFunction(helloUser);  // 해당 유저의 실행 창 수행
+					uf.run(helloUser);  // 해당 유저의 실행 창 수행
 					break;
 				}
 			}
@@ -146,7 +144,7 @@ public class Console {
 		}
 		*/
 		
-		for (User user : userInfo) {
+		for (User user : admin.getUserList()) {
 			if (user.getID().equals(id)) {
 				if (user.getPW().equals(pw)) {
 					System.out.println(user.getName() + "님 로그인 성공");
@@ -236,7 +234,7 @@ public class Console {
 			else break;
 		}
 		if (goMain == true) return;
-		userInfo.add(new User(name, id, pw, number));
+		admin.getUserList().add(new User(name, id, pw, number));
 		System.out.println("회원 가입이 완료되었습니다.\n");
 	}
 

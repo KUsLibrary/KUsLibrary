@@ -1,6 +1,8 @@
 package tmp;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -10,13 +12,15 @@ public class Console {
 	private String input;
 	private AdminFunction af;
 	private UserFunction uf;
+	private static final String UserFileString = "src/UserFile.txt";
+	private static final String BookFileString = "";  // 책 파일 경로!
 	
 	Console() {
 		admin = new Admin();
 		scanner = new Scanner(System.in);
 		af = new AdminFunction(admin);
 		uf = new UserFunction();
-		readUserFile("src/UserFile.txt");
+		readUserFile(UserFileString);
 	}
 	
 	/*
@@ -86,7 +90,15 @@ public class Console {
 					break;
 				case "2": signUp();
 					break;
-				case "3": System.exit(0);
+				case "3":
+					System.exit(0);
+				try {
+					writeUserFile(UserFileString);
+					writeBookFile(BookFileString);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 					break;
 			}
 		}
@@ -264,6 +276,61 @@ public class Console {
 			if (korCheck == true || strangeCheck == true)
 				return false;
 			else return true;
-		}		
+		}
+	}
+	
+	public void writeUserFile(String file) throws IOException {
+		File oFile = new File(file);
+		try {
+			FileOutputStream fos = new FileOutputStream(oFile);
+			for(User user : admin.getUserList()) {
+				String text = "__USER__";
+				byte[] buf1 = text.getBytes();
+				fos.write(buf1);
+				fos.flush();
+				text = user.getName();
+				byte[] buf2 = text.getBytes();
+				fos.write(buf2);
+				fos.flush();
+				text = user.getID();
+				byte[] buf3 = text.getBytes();
+				fos.write(buf3);
+				fos.flush();
+				text = user.getNumber();
+				byte[] buf4 = text.getBytes();
+				fos.write(buf4);
+				fos.flush();
+				text = "_BOOK_";
+				byte[] buf5 = text.getBytes();
+				fos.write(buf5);
+				fos.flush();
+				for (String key : user.getBookMap().keySet()) {
+					byte[] buf6 = (key + " " + user.getBookMap().get(key)).getBytes();
+					fos.write(buf6);
+					fos.flush();
+				}
+			}
+			fos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void writeBookFile(String file) throws IOException {
+		File oFile = new File(file);
+		try {
+			FileOutputStream fos = new FileOutputStream(oFile);
+			/*
+			 * 책 객체 양식 만들면
+			 * 그에 따라 수정할 예정!
+			 */
+			fos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }

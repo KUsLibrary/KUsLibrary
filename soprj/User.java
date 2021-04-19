@@ -35,7 +35,12 @@ public class User {
 	public String getPW() {
 		return pw;
 	}
-	public HashMap<String, String> getBookMap() { //HashMap접근용
+	
+	public String getNumber() {
+		return number;
+	}
+	
+	public HashMap<String, String> getBookMap() {
 		return bookMap;
 	}
 }
